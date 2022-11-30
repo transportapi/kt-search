@@ -1,11 +1,14 @@
 package com.jillesvangurp.ktsearch
 
-import kotlin.native.concurrent.ThreadLocal
+interface IndexProvider {
+    fun get(): Int
+    fun set(value: Int)
+}
+expect fun indexProvider(): IndexProvider
 
 class RoundRobinNodeSelector(
     private val nodes: Array<out Node>
 ) : NodeSelector {
-    @ThreadLocal
     private var index: Int = 0
     override fun selectNode(): Node {
         return nodes[index++].also {
