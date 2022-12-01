@@ -1,8 +1,6 @@
 package com.jillesvangurp.ktsearch
 
-class SimpleIndexProvider : IndexProvider {
-    private var index = 0
-
+class SimpleIndexProvider(private var index: Int) : IndexProvider {
     override fun get(): Int = index
 
     override fun set(value: Int) {
@@ -10,4 +8,4 @@ class SimpleIndexProvider : IndexProvider {
     }
 }
 
-actual fun indexProvider(): IndexProvider = SimpleIndexProvider()
+actual fun indexProvider(initialIndex: Int): IndexProvider = SimpleIndexProvider(initialIndex)
