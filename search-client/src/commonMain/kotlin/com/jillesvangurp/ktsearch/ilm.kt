@@ -83,12 +83,6 @@ class ILMConfiguration: JsonDsl() {
 }
 
 suspend fun SearchClient.setIlmPolicy(policyId: String, block: IMLPhases.()->Unit): AcknowledgedResponse {
-    validateEngine(
-        "ilm only works on Elasticsearch",
-        SearchEngineVariant.ES7,
-        SearchEngineVariant.ES8
-    )
-
     val config = ILMConfiguration()
     config.policy.phases.apply(block)
 
